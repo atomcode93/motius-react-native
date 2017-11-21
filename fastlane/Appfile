@@ -1,0 +1,12 @@
+# General
+#Team identifier
+team_id "5RX72K28R5"
+# The name of the organisation
+team_name "Motius GmbH"
+# Your Apple email address
+apple_id "daniel.weiss@motius.de"
+
+# Per App
+# The bundle identifier of your app
+app_identifier "de.motius.community"
+package_name "de.motius.community"

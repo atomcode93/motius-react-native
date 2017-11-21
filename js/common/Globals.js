@@ -1,0 +1,16 @@
+module.exports = {
+  SLACK_HISTORY_CHANNEL: 'https://slack.com/api/channels.history?token=xoxp-179940535380-179891467378-248996050244-98586c5720566924c174934ee1cee38f&channel=C59TNFSDS&pretty=1',
+  SLACK_USERS_LIST: 'https://slack.com/api/users.list?token=xoxp-179940535380-179891467378-248996050244-98586c5720566924c174934ee1cee38f&channel=C59TNFSDS&pretty=1',
+  SLACK_TOKEN: 'xoxp-179940535380-179891467378-248996050244-98586c5720566924c174934ee1cee38f',
+  FACEBOOK_TOKEN: 'EAACEdEose0cBALWsqvdtjwOtz8g8NdZB7jOYXCcgNZBmL4xKdZCT3iT3q1zjFvQVQ1ZAnkxaCsICWtT4UymiUTDbXRjneYxjFnwhQ9DTN1ZA9QGS0yAWDUtuKAx1NV1V7UkfKcUnMhk3uIEHgEP3mOFxBy4gIwihfg05SSsgfiuoprKrD6xPXFfwItZCdNvHVVKOOwZCT4vlgZDZD',
+  FACEBOOK_USER: 'https://graph.facebook.com/me?fields=id,name,picture,email&access_token=EAACEdEose0cBALWsqvdtjwOtz8g8NdZB7jOYXCcgNZBmL4xKdZCT3iT3q1zjFvQVQ1ZAnkxaCsICWtT4UymiUTDbXRjneYxjFnwhQ9DTN1ZA9QGS0yAWDUtuKAx1NV1V7UkfKcUnMhk3uIEHgEP3mOFxBy4gIwihfg05SSsgfiuoprKrD6xPXFfwItZCdNvHVVKOOwZCT4vlgZDZD',
+  FACEBOOK_POST: 'https://graph.facebook.com/me/posts?access_token=EAACEdEose0cBALWsqvdtjwOtz8g8NdZB7jOYXCcgNZBmL4xKdZCT3iT3q1zjFvQVQ1ZAnkxaCsICWtT4UymiUTDbXRjneYxjFnwhQ9DTN1ZA9QGS0yAWDUtuKAx1NV1V7UkfKcUnMhk3uIEHgEP3mOFxBy4gIwihfg05SSsgfiuoprKrD6xPXFfwItZCdNvHVVKOOwZCT4vlgZDZD',
+  INSTAGRAM_TOKEN: '6066742191.1677ed0.8d581e56ac8641ee9c752b49e56cc90e',
+  INSTAGRAM_MEDIA: 'https://api.instagram.com/v1/users/self/media/recent?access_token=6066742191.1677ed0.8d581e56ac8641ee9c752b49e56cc90e',
+  INSTAGRAM_USER: 'https://api.instagram.com/v1/users/self?access_token=6066742191.1677ed0.8d581e56ac8641ee9c752b49e56cc90e',
+  PROJECT_LIST_API: 'https://www.motius.de/api/projects/',
+  INVITATION_LIST_API: 'https://www.motius.de/api/projects/invitations/',
+  TOKEN_AUTH: 'https://www.motius.de/api/token-auth/',
+  MILESTONES_API: (projectID) => `https://www.motius.de/api/projects/${projectID}/milestones/`,
+  TIMELOGS_API: (projectID) => `https://www.motius.de/api/projects/${projectID}/timelogs/`,
+};

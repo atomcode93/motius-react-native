@@ -1,0 +1,4 @@
+git_url "git@gitlab.motius.de:internal/provisioning-profiles.git"
+type "development"
+app_identifier "de.motius.community"
+username "daniel.weiss@motius.de"

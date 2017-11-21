@@ -1,0 +1,50 @@
+{
+  "name": "MotiusCommunityApp",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "test": "jest",
+    "lint": "eslint js/"
+  },
+  "dependencies": {
+    "axios": "^0.15.3",
+    "firebase": "^3.7.4",
+    "minutes-seconds-milliseconds": "^1.0.3",
+    "moment": "^2.18.1",
+    "node-emoji": "^1.8.1",
+    "react": "~15.4.1",
+    "react-native": "0.42.3",
+    "react-native-fbsdk": "^0.6.1",
+    "react-native-router-flux": "3.30.9",
+    "react-native-swiper": "^1.5.4",
+    "react-native-cookies": "^3.2.0",
+    "react-native-drawer": "^2.3.0",
+    "react-native-image-picker": "^0.26.2",
+    "react-native-keyboard-aware-scroll-view": "^0.2.8",
+    "react-native-vector-icons": "^4.0.0",
+    "react-native-video": "^2.0.0",
+    "react-navigation": "^1.0.0-beta.7",
+    "react-redux": "^5.0.5",
+    "redux": "^3.6.0",
+    "redux-persist": "^4.5.0",
+    "redux-thunk": "^2.2.0",
+    "striptags": "^3.1.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "^7.2.0",
+    "babel-jest": "19.0.0",
+    "babel-preset-react-native": "1.9.1",
+    "eslint": "^3.18.0",
+    "eslint-config-rallycoding": "^3.2.0",
+    "eslint-plugin-flowtype": "^2.30.4",
+    "eslint-plugin-react": "^6.10.3",
+    "eslint-plugin-react-native": "^2.3.1",
+    "jest": "19.0.2",
+    "react-test-renderer": "~15.4.1",
+    "remote-redux-devtools": "^0.5.7"
+  },
+  "jest": {
+    "preset": "react-native"
+  }
+}

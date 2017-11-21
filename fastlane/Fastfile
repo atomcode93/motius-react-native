@@ -1,0 +1,142 @@
+fastlane_version "1.103.0"
+
+platform :ios do
+        lane :icon do
+            appicon(
+                appicon_image_file: 'icon/source.png',
+                appicon_devices: [:iphone, :ipad]
+            )
+            Dir.chdir('..') do
+                sh('rm -f ios/MotiusCommunityApp/Images.xcassets/AppIcon.appiconset/*')
+                sh('cp -R Assets.xcassets/AppIcon.appiconset ios/MotiusCommunityApp/Images.xcassets/')
+                sh('rm -Rf Assets.xcassets')
+            end
+        end
+
+        lane :beta do
+            # React Native
+            Dir.chdir("..") do
+               sh('yarn install')
+            end
+            unlock_keychain(
+              	path: "login",
+              	password: ENV["ADMIN_KEY"]
+            )
+            # Certs
+            match
+            # Compiling
+            gym(
+		project: "./ios/MotiusCommunityApp.xcodeproj",
+		scheme: ENV["SCHEME"],
+		archive_path: "./ios/#{ENV["PROJECT"]}",
+		output_name: "#{ENV["PROJECT"]}.ipa",
+                clean: true,
+                export_method: "development"
+            )
+            Dir.chdir("..") do
+            	sh('rm -Rf node_modules')
+            end
+        end
+
+        lane :release do
+            # React Native
+            Dir.chdir("..") do
+              sh('yarn install')
+            end
+            unlock_keychain(
+                path: "login",
+                password: ENV["ADMIN_KEY"]
+            )
+            # Increment the build Number.
+            increment_build_number({
+                build_number: 1,
+                xcodeproj: "./ios/#{ENV["PROJECT"]}.xcodeproj"
+            })
+            # Increment the version number
+            increment_version_number({
+                version_number: last_git_tag,
+                xcodeproj: "./ios/#{ENV["PROJECT"]}.xcodeproj"
+            })
+            # Certs
+            match
+            # Compiling
+            gym(
+		project: "./ios/MotiusCommunityApp.xcodeproj",
+		scheme: ENV["SCHEME"],
+		archive_path: "./ios/#{ENV["PROJECT"]}",
+		output_name: "#{ENV["PROJECT"]}.ipa",
+      		clean: true,
+                export_method: "development"
+            )
+            # Push to Hockey
+            hockey(
+				api_token: ENV["API_TOKEN"],
+				public_identifier: ENV["APP_ID_IOS"],
+				# notes: changelog,
+				notify: '0', # Means do not notify
+            )
+            Dir.chdir("..") do
+              sh('rm -Rf node_modules')
+            end
+        end
+end
+
+
+platform :android do
+        lane :icon do
+            android_appicon(
+                appicon_devices: [:phone, :tablet],
+                appicon_image_file: 'icon/source.png',
+                appicon_path:'icon/android/mipmap'
+            )
+            Dir.chdir('..') do
+                sh('cp -R icon/android/* android/app/src/main/res')
+                sh('rm -Rf icon/android/')
+            end
+        end
+
+        lane :beta do
+            # React Native
+            Dir.chdir("..") do
+              sh('yarn install')
+              sh('cp ~/release.keystore android/app/')
+              sh('cp ~/.gradle/gradle.properties android/local.properties')
+            end
+            # Compiling
+            gradle(
+                task: 'assembleRelease',
+                project_dir: './android/'
+            )
+            Dir.chdir("..") do
+              sh('rm -Rf node_modules')
+            end
+        end
+        lane :release do
+            # React Native
+            Dir.chdir("..") do
+              sh('yarn install')
+              sh('cp ~/release.keystore android/app/')
+              sh('cp ~/.gradle/gradle.properties android/local.properties')
+            end
+            # Compiling
+            increment_version_name(
+		app_project_dir: 'android/app',
+		version_name: last_git_tag
+	    )
+            gradle(
+                task: 'assembleRelease',
+                project_dir: './android/'
+            )
+            # Hockey
+            hockey(
+                api_token: ENV["API_TOKEN"],
+                #apk: './android/app/build/outputs/apk/app-release-unsigned.apk',
+                public_identifier: ENV["APP_ID_ANDROID"],
+                # notes: changelog,
+                notify: '0', # Means do not notify
+            )
+            Dir.chdir("..") do
+              sh('rm -Rf node_modules')
+            end
+        end
+end
